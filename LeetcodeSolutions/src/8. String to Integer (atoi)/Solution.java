@@ -1,0 +1,25 @@
+public class Solution {
+    public int myAtoi(String s) {
+        s = s.strip();
+        if (s.isEmpty())
+            return 0;
+
+        int sign = s.charAt(0) == '-' ? -1 : 1;
+        if (s.charAt(0) == '+' || s.charAt(0) == '-')
+            s = s.substring(1);
+        long n = 0;
+
+        for (char c : s.toCharArray()) {
+            if (!Character.isDigit(c))
+                break;
+
+            n = n * 10 + (c - '0');
+            if (sign * n <= Integer.MIN_VALUE)
+                return Integer.MIN_VALUE;
+            if (sign * n >= Integer.MAX_VALUE)
+                return Integer.MAX_VALUE;
+        }
+
+        return sign * (int) n;
+    }
+}
